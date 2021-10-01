@@ -1,0 +1,581 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Robot and interface specifications &mdash; Franka Control Interface (FCI)  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Franka Control Interface (FCI)  documentation" href="index.html"/>
+        <link rel="next" title="Troubleshooting" href="troubleshooting.html"/>
+        <link rel="prev" title="franka_ros changelog" href="franka_ros_changelog.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+          
+
+          
+            
+            <img src="_static/logo.svg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_linux.html">Installation on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_windows.html">Installation on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka.html">libfranka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka_changelog.html">libfranka changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros_changelog.html">franka_ros changelog</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Robot and interface specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#joint-trajectory-requirements">Joint trajectory requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#necessary-conditions">Necessary conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recommended-conditions">Recommended conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cartesian-trajectory-requirements">Cartesian trajectory requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Necessary conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Recommended conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#controller-requirements">Controller requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Necessary conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Recommended conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#denavithartenberg-parameters">Denavit–Hartenberg parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Robot and interface specifications</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/control_parameters.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="robot-and-interface-specifications">
+<span id="control-parameters-specifications"></span><h1>Robot and interface specifications<a class="headerlink" href="#robot-and-interface-specifications" title="Permalink to this headline">¶</a></h1>
+<p>Realtime control commands sent to the robot should fulfill <em>recommended</em> and <em>necessary</em>
+conditions. Recommended conditions should be fulfilled to ensure optimal operation of the
+robot. If necessary conditions are not met then the motion will be aborted.</p>
+<p>The final robot trajectory is the result of processing the user-specified trajectory ensuring
+that recommended conditions are fulfilled. As long as necessary conditions are met, the robot
+will try to follow the user-provided trajectory but it will only match the final trajectory
+if it also fulfills recommended conditions. If the necessary conditions are violated, an error
+will abort the motion: if, for instance, the first point of the user defined joint trajectory
+is very different from robot start position (<span class="math">\(q(t=0) \neq q_c(t=0)\)</span>) a <code class="docutils literal"><span class="pre">start_pose_invalid</span></code> error
+will abort the motion.</p>
+<p>Values for the constants used in the equations below are shown in the <a class="reference internal" href="#constants">Constants</a> section.</p>
+<div class="section" id="joint-trajectory-requirements">
+<h2>Joint trajectory requirements<a class="headerlink" href="#joint-trajectory-requirements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="necessary-conditions">
+<h3>Necessary conditions<a class="headerlink" href="#necessary-conditions" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><span class="math">\(q_{min} &lt; q_c &lt; q_{max}\)</span></li>
+<li><span class="math">\(-\dot{q}_{max} &lt; \dot{q}_c &lt; \dot{q}_{max}\)</span></li>
+<li><span class="math">\(-\ddot{q}_{max} &lt; \ddot{q}_c &lt; \ddot{q}_{max}\)</span></li>
+<li><span class="math">\(-\dddot{q}_{max} &lt; \dddot{q}_c &lt; \dddot{q}_{max}\)</span></li>
+</ol>
+</div>
+<div class="section" id="recommended-conditions">
+<h3>Recommended conditions<a class="headerlink" href="#recommended-conditions" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><span class="math">\(-{\tau_j}_{max} &lt; {\tau_j}_d &lt; {\tau_j}_{max}\)</span></li>
+<li><span class="math">\(-\dot{\tau_j}_{max} &lt; \dot{\tau_j}_d &lt; \dot{\tau_j}_{max}\)</span></li>
+</ol>
+<p>At the beginning of the trajectory, the following conditions should be fulfilled:</p>
+<ol class="arabic simple" start="3">
+<li><span class="math">\(q = q_c\)</span></li>
+<li><span class="math">\(\dot{q}_{c} = 0\)</span></li>
+<li><span class="math">\(\ddot{q}_{c} = 0\)</span></li>
+</ol>
+<p>At the end of the trajectory, the following conditions should be fulfilled:</p>
+<ol class="arabic simple" start="6">
+<li><span class="math">\(\dot{q}_{c} = 0\)</span></li>
+<li><span class="math">\(\ddot{q}_{c} = 0\)</span></li>
+</ol>
+</div>
+</div>
+<div class="section" id="cartesian-trajectory-requirements">
+<h2>Cartesian trajectory requirements<a class="headerlink" href="#cartesian-trajectory-requirements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Necessary conditions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><span class="math">\(T\)</span> is proper transformation matrix</li>
+<li><span class="math">\(-\dot{p}_{max} &lt; \dot{p_c} &lt; \dot{p}_{max}\)</span> (Cartesian velocity)</li>
+<li><span class="math">\(-\ddot{p}_{max} &lt; \ddot{p_c} &lt; \ddot{p}_{max}\)</span> (Cartesian acceleration)</li>
+<li><span class="math">\(-\dddot{p}_{max} &lt; \dddot{p_c} &lt; \dddot{p}_{max}\)</span> (Cartesian jerk)</li>
+</ol>
+<p>Conditions derived from inverse kinematics:</p>
+<ol class="arabic simple" start="5">
+<li><span class="math">\(q_{min} &lt; q_c &lt; q_{max}\)</span></li>
+<li><span class="math">\(-\dot{q}_{max} &lt; \dot{q_c} &lt; \dot{q}_{max}\)</span></li>
+<li><span class="math">\(-\ddot{q}_{max} &lt; \ddot{q_c} &lt; \ddot{q}_{max}\)</span></li>
+</ol>
+</div>
+<div class="section" id="id2">
+<h3>Recommended conditions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Conditions derived from inverse kinematics:</p>
+<ol class="arabic simple">
+<li><span class="math">\(-{\tau_j}_{max} &lt; {\tau_j}_d &lt; {\tau_j}_{max}\)</span></li>
+<li><span class="math">\(-\dot{\tau_j}_{max} &lt; \dot{{\tau_j}_d} &lt; \dot{\tau_j}_{max}\)</span></li>
+</ol>
+<p>At the beginning of the trajectory, the following conditions should be fulfilled:</p>
+<ol class="arabic simple" start="3">
+<li><span class="math">\({}^OT_{EE} = {{}^OT_{EE}}_c\)</span></li>
+<li><span class="math">\(\dot{p}_{c} = 0\)</span> (Cartesian velocity)</li>
+<li><span class="math">\(\ddot{p}_{c} = 0\)</span> (Cartesian acceleration)</li>
+</ol>
+<p>At the end of the trajectory, the following conditions should be fulfilled:</p>
+<ol class="arabic simple" start="6">
+<li><span class="math">\(\dot{p}_{c} = 0\)</span> (Cartesian velocity)</li>
+<li><span class="math">\(\ddot{p}_{c} = 0\)</span> (Cartesian acceleration)</li>
+</ol>
+</div>
+</div>
+<div class="section" id="controller-requirements">
+<h2>Controller requirements<a class="headerlink" href="#controller-requirements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Necessary conditions<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><span class="math">\(-\dot{\tau_j}_{max} &lt; \dot{{\tau_j}_d} &lt; \dot{\tau_j}_{max}\)</span></li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h3>Recommended conditions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><span class="math">\(-{\tau_j}_{max} &lt; {\tau_j}_d &lt; {\tau_j}_{max}\)</span></li>
+</ol>
+<p>At the beginning of the trajectory, the following conditions should be fulfilled:</p>
+<ol class="arabic simple" start="2">
+<li><span class="math">\({\tau_j}_{d} = 0\)</span></li>
+</ol>
+</div>
+</div>
+<div class="section" id="constants">
+<span id="limit-table"></span><h2>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h2>
+<p>Limits in the Cartesian space are as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="28%" />
+<col width="30%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Translation</th>
+<th class="head">Rotation</th>
+<th class="head">Elbow</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math">\(\dot{p}_{max}\)</span></td>
+<td>1.7000 <span class="math">\(\frac{\text{m}}{\text{s}}\)</span></td>
+<td>2.5000 <span class="math">\(\frac{\text{rad}}{\text{s}}\)</span></td>
+<td>2.1750 <span class="math">\(\frac{rad}{\text{s}}\)</span></td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(\ddot{p}_{max}\)</span></td>
+<td>13.0000 <span class="math">\(\frac{\text{m}}{\text{s}^2}\)</span></td>
+<td>25.0000 <span class="math">\(\frac{\text{rad}}{\text{s}^2}\)</span></td>
+<td>10.0000 <span class="math">\(\;\frac{rad}{\text{s}^2}\)</span></td>
+</tr>
+<tr class="row-even"><td><span class="math">\(\dddot{p}_{max}\)</span></td>
+<td>6500.0000 <span class="math">\(\frac{\text{m}}{\text{s}^3}\)</span></td>
+<td>12500.0000 <span class="math">\(\frac{\text{rad}}{\text{s}^3}\)</span></td>
+<td>5000.0000 <span class="math">\(\;\frac{rad}{\text{s}^3}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Joint space limits are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Joint 1</th>
+<th class="head">Joint 2</th>
+<th class="head">Joint 3</th>
+<th class="head">Joint 4</th>
+<th class="head">Joint 5</th>
+<th class="head">Joint 6</th>
+<th class="head">Joint 7</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math">\(q_{max}\)</span></td>
+<td>2.8973</td>
+<td>1.7628</td>
+<td>2.8973</td>
+<td>-0.0698</td>
+<td>2.8973</td>
+<td>3.7525</td>
+<td>2.8973</td>
+<td><span class="math">\(\text{rad}\)</span></td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(q_{min}\)</span></td>
+<td>-2.8973</td>
+<td>-1.7628</td>
+<td>-2.8973</td>
+<td>-3.0718</td>
+<td>-2.8973</td>
+<td>-0.0175</td>
+<td>-2.8973</td>
+<td><span class="math">\(\text{rad}\)</span></td>
+</tr>
+<tr class="row-even"><td><span class="math">\(\dot{q}_{max}\)</span></td>
+<td>2.1750</td>
+<td>2.1750</td>
+<td>2.1750</td>
+<td>2.1750</td>
+<td>2.6100</td>
+<td>2.6100</td>
+<td>2.6100</td>
+<td><span class="math">\(\frac{\text{rad}}{\text{s}}\)</span></td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(\ddot{q}_{max}\)</span></td>
+<td>15</td>
+<td>7.5</td>
+<td>10</td>
+<td>12.5</td>
+<td>15</td>
+<td>20</td>
+<td>20</td>
+<td><span class="math">\(\frac{\text{rad}}{\text{s}^2}\)</span></td>
+</tr>
+<tr class="row-even"><td><span class="math">\(\dddot{q}_{max}\)</span></td>
+<td>7500</td>
+<td>3750</td>
+<td>5000</td>
+<td>6250</td>
+<td>7500</td>
+<td>10000</td>
+<td>10000</td>
+<td><span class="math">\(\frac{\text{rad}}{\text{s}^3}\)</span></td>
+</tr>
+<tr class="row-odd"><td><span class="math">\({\tau_j}_{max}\)</span></td>
+<td>87</td>
+<td>87</td>
+<td>87</td>
+<td>87</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td><span class="math">\(\text{Nm}\)</span></td>
+</tr>
+<tr class="row-even"><td><span class="math">\(\dot{\tau_j}_{max}\)</span></td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td>1000</td>
+<td><span class="math">\(\frac{\text{Nm}}{\text{s}}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="denavithartenberg-parameters">
+<h2>Denavit–Hartenberg parameters<a class="headerlink" href="#denavithartenberg-parameters" title="Permalink to this headline">¶</a></h2>
+<p>The Denavit–Hartenberg parameters for the Panda’s kinematic chain are derived following Craig’s convention and are as follows:</p>
+<div class="align-center figure" id="id5">
+<img alt="_images/dh-diagram.png" src="_images/dh-diagram.png" />
+<p class="caption"><span class="caption-text">Panda’s kinematic chain.</span></p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="19%" />
+<col width="19%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Joint</th>
+<th class="head"><span class="math">\(a\;(\text{m})\)</span></th>
+<th class="head"><span class="math">\(d\;(\text{m})\)</span></th>
+<th class="head"><span class="math">\(\alpha\;(\text{rad})\)</span></th>
+<th class="head"><span class="math">\(\theta\;(\text{rad})\)</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Joint 1</td>
+<td>0</td>
+<td>0.333</td>
+<td>0</td>
+<td><span class="math">\(\theta_1\)</span></td>
+</tr>
+<tr class="row-odd"><td>Joint 2</td>
+<td>0</td>
+<td>0</td>
+<td><span class="math">\(-\frac{\pi}{2}\)</span></td>
+<td><span class="math">\(\theta_2\)</span></td>
+</tr>
+<tr class="row-even"><td>Joint 3</td>
+<td>0</td>
+<td>0.316</td>
+<td><span class="math">\(\frac{\pi}{2}\)</span></td>
+<td><span class="math">\(\theta_3\)</span></td>
+</tr>
+<tr class="row-odd"><td>Joint 4</td>
+<td>0.0825</td>
+<td>0</td>
+<td><span class="math">\(\frac{\pi}{2}\)</span></td>
+<td><span class="math">\(\theta_4\)</span></td>
+</tr>
+<tr class="row-even"><td>Joint 5</td>
+<td>-0.0825</td>
+<td>0.384</td>
+<td><span class="math">\(-\frac{\pi}{2}\)</span></td>
+<td><span class="math">\(\theta_5\)</span></td>
+</tr>
+<tr class="row-odd"><td>Joint 6</td>
+<td>0</td>
+<td>0</td>
+<td><span class="math">\(\frac{\pi}{2}\)</span></td>
+<td><span class="math">\(\theta_6\)</span></td>
+</tr>
+<tr class="row-even"><td>Joint 7</td>
+<td>0.088</td>
+<td>0</td>
+<td><span class="math">\(\frac{\pi}{2}\)</span></td>
+<td><span class="math">\(\theta_7\)</span></td>
+</tr>
+<tr class="row-odd"><td>Flange</td>
+<td>0</td>
+<td>0.107</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><span class="math">\({}^0T_{1}\)</span> is the transformation matrix which describes the position and orientation of
+<cite>frame 1</cite> in <cite>frame 0</cite>. A kinematic chain can be calculated like the following:
+<span class="math">\({}^0T_{2} = {}^0T_{1} * {}^1T_{2}\)</span></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Troubleshooting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="franka_ros_changelog.html" class="btn btn-neutral" title="franka_ros changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Franka Emika GmbH.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
